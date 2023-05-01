@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Добро пожаловать!
+<div sec:authorize="isAuthenticated()">
+    Вы вошли как <span sec:authentication="name"></span></div>
+<br>
+<table>
+    <tr>
+        <th>Имя пользователя</th>
+        <th>Пароль</th>
+        <th>E-mail</th>
+        <th>Роли</th>
+    </tr>
+    <tr th:each="userLog : ${userLog}">
+        <td th:text="${userLog.username}"></td>
+        <td th:text="${userLog.password}"></td>
+        <td th:text="${userLog.email}"></td>
+        <td th:text="${userLog.roles}"></td>
+    </tr>
+</table>
+<br>
+<a href="/logout">Выход</a>
+
+</body>
+</html>
