@@ -7,9 +7,6 @@ import ru.stroich.springsecurity6.model.User;
 import ru.stroich.springsecurity6.service.RoleService;
 import ru.stroich.springsecurity6.service.UserService;
 
-
-import java.util.List;
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -23,35 +20,25 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping()
-    public String showAllUsers(ModelMap model) {
-        List<User> allUsers = userService.getAllUsers();
-        model.addAttribute("allUsers", allUsers);
-        return "table";
-    }
 
-    @GetMapping("/addUser")
+    @GetMapping("")
     public String newUser(ModelMap model) {
         model.addAttribute("user", new User());
+        model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("listRoles", roleService.getAllRoles());
-        return "user-info";
+        return "table";
     }
 
     @PostMapping()
     public String addNewUser(@ModelAttribute("user") User user) {
-
-        if (user.getId() == null) {
-            userService.saveUser(user);
-        }
-        userService.updateUser(user);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
     @PatchMapping("/update/{id}")
-    public String updateUser(ModelMap model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("listRoles", roleService.getAllRoles());
-        return "user-info";
+    public String update(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/delete/{id}")
@@ -59,5 +46,4 @@ public class AdminController {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
-
 }
