@@ -23,7 +23,6 @@ public class AdminController {
 
     @GetMapping("")
     public String newUser(ModelMap model) {
-        model.addAttribute("user", new User());
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("listRoles", roleService.getAllRoles());
         return "table";
