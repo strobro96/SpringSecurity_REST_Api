@@ -214,7 +214,7 @@ const deleteUser = async ({id}) => fetch(`/api/users/${id}`, {
 });
 
 const editUser = async (user) => fetch(`/api/users/`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(user)
 });

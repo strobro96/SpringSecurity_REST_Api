@@ -47,7 +47,7 @@ public class AdminRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PatchMapping ()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
